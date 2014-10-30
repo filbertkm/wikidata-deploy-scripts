@@ -1,0 +1,16 @@
+#!/bin/sh                                                                                              
+                                                                                                       
+git clone ssh://gerrit.wikimedia.org:29418/mediawiki/extensions/Wikidata.git Wikidata                  
+cd Wikidata                                                                                            
+                                                                                                       
+git checkout -b $2 origin/$1                                                                           
+git push origin $2                                                                                     
+                                                                                                       
+npm install                                                                                            
+                                                                                                       
+grunt branch --branchName="$2"                                                                         
+                                                                                                       
+git add -A                                                                                             
+git commit                                                                                             
+                                                                                                       
+git review $2
